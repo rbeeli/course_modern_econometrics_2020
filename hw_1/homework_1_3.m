@@ -2,13 +2,10 @@ clc; clear; close all force; rng default;
 
 
 % parameters
-n_loops = 5000000;                 % number of simulations to run / loops
-p = [0.4; 0.6; 0.55; 0.45; 0.6];   % probability of having a daugther
-r = [2; 3; 4; 2; 5];               % number of required daughters
-
-x_min = sum(r);
-x_max = 50;                        % max value for x-axis
-x_vals = (x_min:x_max)';           % x axis values - total number of kids
+n_loops = 5000000;                  % number of simulations to run / loops
+p = [0.4; 0.6; 0.55; 0.45; 0.6];    % probability of having a daugther
+r = [2; 3; 4; 2; 5];                % number of required daughters
+x = (sum(r):50)';                   % x values
 
 
 
@@ -16,16 +13,16 @@ x_vals = (x_min:x_max)';           % x axis values - total number of kids
 % calculations
 
 % simulation
-sim_hist = run_sim(n_loops, p, r, x_max); % returns histogram
-sim_vals_pmf = sim_pmf_vec(x_vals, sim_hist);
-sim_vals_cdf = sim_cdf_vec(x_vals, sim_hist);
+sim_hist = run_sim(n_loops, p, r, max(x)); % returns histogram
+sim_vals_pmf = sim_pmf_vec(x, sim_hist);
+sim_vals_cdf = sim_cdf_vec(x, sim_hist);
 
 % 1st order saddlepoint approximation
-spa1_vals_pmf = spa1_pmf_vec(x_vals, p, r);
-spa1_vals_cdf = spa1_cdf_vec(x_vals, p, r);
+spa1_vals_pmf = spa1_pmf_vec(x, p, r);
+spa1_vals_cdf = spa1_cdf_vec(x, p, r);
 
 % 2nd order saddlepoint approximation
-spa2_vals_pmf = spa2_pmf_vec(x_vals, p, r);
+spa2_vals_pmf = spa2_pmf_vec(x, p, r);
 
 
 
@@ -40,11 +37,11 @@ title(t, sprintf('PMF and CDF estimation with r=%s and p=%s', ...
 
 % PMF
 nexttile
-plot(x_vals, sim_vals_pmf, 'Color','blue', 'LineWidth',1)
+plot(x, sim_vals_pmf, 'Color','blue', 'LineWidth',1)
 hold on
-plot(x_vals, spa1_vals_pmf, 'Color','magenta', 'LineWidth',2, 'LineStyle', '--')
+plot(x, spa1_vals_pmf, 'Color','magenta', 'LineWidth',2, 'LineStyle', '--')
 hold on
-plot(x_vals, spa2_vals_pmf, 'Color','green', 'LineWidth',2, 'LineStyle', ':')
+plot(x, spa2_vals_pmf, 'Color','green', 'LineWidth',2, 'LineStyle', ':')
 title('Probability mass function (PMF)')
 xlabel('$z$: Total number of kids', 'Interpreter', 'Latex')
 ylabel('Probability: $f_Z(z) = P(Z = z)$', 'Interpreter', 'Latex')
@@ -52,9 +49,9 @@ legend({sprintf('Simulation (%i samples)', n_loops), 'SPA 1st order', 'SPA 2nd o
 
 % CDF
 nexttile
-stairs(x_vals, sim_vals_cdf, 'Color','blue', 'LineWidth',1)
+stairs(x, sim_vals_cdf, 'Color','blue', 'LineWidth',1)
 hold on
-stairs(x_vals, spa1_vals_cdf, 'Color','magenta', 'LineWidth',1, 'LineStyle', '--')
+stairs(x, spa1_vals_cdf, 'Color','magenta', 'LineWidth',1, 'LineStyle', '--')
 title('Cumulative distribution function (CDF)')
 ylim([-0.01 1.01])
 xlabel('$z$: Total number of kids', 'Interpreter', 'Latex')
@@ -67,7 +64,7 @@ set(gcf, 'Position',  [800, 200, 1000, 1000])
 set(h,'Units','Inches');
 pos = get(h,'Position');
 set(h,'PaperPositionMode','Auto','PaperUnits','Inches','PaperSize',[pos(3), pos(4)])
-print(h,'report/3_plots.pdf','-dpdf','-r0')
+print(h,'3_plots.pdf','-dpdf','-r0')
 
 
 
@@ -136,7 +133,7 @@ end
 % --------------------------------------------------------------------------------------
 % Saddlepoint approximation (SPA)
 % --------------------------------------------------------------------------------------
-    
+
 % cumulant generating function and derivatives 1 to 4
 function k = K(t, p, r) 
     k = sum(r .* log(p) + r*t - r .* log(1 - (1-p)*exp(t)));
@@ -293,17 +290,3 @@ end
 function p = spa2_pmf_vec(x_vec, p, r)
     p = arrayfun(@(x) spa2_pmf(x, p, r), x_vec);
 end
-
-
-
-
-
-
-
-
-
-
-
-
-
-

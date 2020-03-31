@@ -170,10 +170,3 @@ fprintf('One-sided bootstrap LR power at alpha=0.01: %.3f \n\n', one_sid_pwr01)
 % how much does the power improve when moving from two- to one-sided tests?
 fprintf('One-sided power improvement at alpha=0.05: %.2f%% \n', 100*(one_sid_pwr05/two_sid_pwr05-1))
 fprintf('One-sided power improvement at alpha=0.01: %.2f%% \n', 100*(one_sid_pwr01/two_sid_pwr01-1))
-
-
-
-
-
-
-

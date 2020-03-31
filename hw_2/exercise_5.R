@@ -138,10 +138,3 @@ cbind(alphas, cv_lambda)
 # minimum MSEs
 mean((Y - rowMeans(X))^2)
 cbind(alphas, cv_min_mse, cv_min_mse == min(cv_min_mse))
-
-
-
-
-
-
-

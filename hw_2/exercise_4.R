@@ -164,10 +164,3 @@ title(expression(bold('LASSO coefficients against penalty' ~ log(lambda))), line
 vnat = coef(cv_lasso$glmnet.fit)
 vnat = vnat[-1, ncol(vnat)]
 axis(4, at=vnat, line=-.5, label=labels(vnat), las=1, tick=F, cex.axis=0.7)
-
-
-
-
-
-
-

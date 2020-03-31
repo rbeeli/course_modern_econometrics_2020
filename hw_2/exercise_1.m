@@ -1,6 +1,18 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Course:       Modern econometric and statistical learning
+%               methods forquantitative asset management
+%
+% Instructor:   Prof. Dr. Marc Paolella, Urban Ulrych
+%               University of Zurich
+%
+% Author:       Rino Beeli
+%
+% Date:         March 31st, 2020
+% 
+% Topic:        Homework 2 - Exercise 1.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 clc; clear; close all force; 
-
-
 
 % ----------------------------------------------------------
 % code based on example 1.11, page 37 of book Linear Models

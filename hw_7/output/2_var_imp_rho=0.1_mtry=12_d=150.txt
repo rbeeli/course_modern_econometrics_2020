@@ -1,0 +1,9 @@
+
+     rho=0.1
+     Selected lag 1,2,3,4:  5%
+     Selected lag=1:        100%
+     Selected lag=2:        77%
+     Selected lag=3:        57%
+     Selected lag=4:        17%
+     Overall:               63%
+  

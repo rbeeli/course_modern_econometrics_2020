@@ -1,0 +1,11 @@
+
+     rho=0.0
+     MSE Gaussian random:         15.406
+     MSE AR(2) fitted:            10.857
+     MSE DGP:                     0.775
+     MSE regression tree:         6.499
+     MSE regression tree pruned:  5.090
+     MSE random forest:           9.192 (OOB=11.018, 77% of times greater than MSE)
+     MSE OLS:                     49.676
+     MSE LASSO:                   9.753
+  
